@@ -85,9 +85,23 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
       const saved = localStorage.getItem(CART_KEY);
       if (saved) {
         const parsed = JSON.parse(saved);
-        return parsed.filter((i: CartItem) =>
-          ALL_PRODUCTS.some((p) => p.id === i.product.id)
-        );
+        if (Array.isArray(parsed)) {
+          const validated = parsed
+            .map((i: any) => {
+              if (!i || !i.product || !i.product.id) return null;
+              const matchedProduct = ALL_PRODUCTS.find((p) => p.id === i.product.id);
+              if (!matchedProduct) return null;
+              return {
+                product: matchedProduct,
+                quantity: typeof i.quantity === 'number' && i.quantity > 0 ? i.quantity : 1,
+                channel: i.channel === 'minorista' || i.channel === 'mayorista' ? i.channel : 'mayorista',
+                wholesaleTierUnits: i.wholesaleTierUnits,
+              } as CartItem;
+            })
+            .filter((i): i is CartItem => i !== null);
+
+          if (validated.length > 0) return validated;
+        }
       }
     } catch {
       // ignore
@@ -100,11 +114,16 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [favorites, setFavorites] = useState<string[]>(() => {
     try {
       const saved = localStorage.getItem(FAVS_KEY);
-      if (saved) return JSON.parse(saved);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed)) {
+          return parsed.filter((id) => typeof id === 'string');
+        }
+      }
     } catch {
       // ignore
     }
-    return ['iphone-17-pro-max', 'afnan-9pm-black', 'stanley-termo-mate-system'];
+    return ['apple-iphone-17-pro-max-256', 'lattafa-khamrah-100ml', 'stanley-termo-mate-system-1200ml'];
   });
 
   const [currency, setCurrency] = useState<CurrencyMode>('ARS');
@@ -211,23 +230,27 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   // Price calculations
   const getItemPrice = (item: CartItem) => {
+    if (!item || !item.product) {
+      return { priceArs: 0, priceUsd: 0 };
+    }
+    const retailEfectivo = item.product.retail?.efectivo || 0;
     if (item.channel === 'minorista') {
-      const priceArs = item.product.retail.efectivo;
+      const priceArs = retailEfectivo;
       const priceUsd = Math.round(priceArs / 1250);
       return { priceArs, priceUsd };
     } else {
-      // Wholesale: determine tier based on quantity
-      const q = item.quantity;
-      let tier = item.product.wholesale[0];
-      for (let i = item.product.wholesale.length - 1; i >= 0; i--) {
-        if (q >= item.product.wholesale[i].units) {
-          tier = item.product.wholesale[i];
+      const q = item.quantity || 1;
+      const wholesale = Array.isArray(item.product.wholesale) ? item.product.wholesale : [];
+      let tier = wholesale[0];
+      for (let i = wholesale.length - 1; i >= 0; i--) {
+        if (wholesale[i] && q >= wholesale[i].units) {
+          tier = wholesale[i];
           break;
         }
       }
       return {
-        priceArs: tier?.priceArs || item.product.retail.efectivo,
-        priceUsd: tier?.priceUsd || Math.round(item.product.retail.efectivo / 1250),
+        priceArs: tier?.priceArs || retailEfectivo,
+        priceUsd: tier?.priceUsd || Math.round(retailEfectivo / 1250),
       };
     }
   };

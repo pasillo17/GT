@@ -93,10 +93,62 @@ function MainApp() {
   );
 }
 
+class ErrorBoundary extends React.Component<
+  { children: React.ReactNode },
+  { hasError: boolean; error?: Error }
+> {
+  constructor(props: { children: React.ReactNode }) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError(error: Error) {
+    return { hasError: true, error };
+  }
+
+  componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
+    console.error("App Error caught by ErrorBoundary:", error, errorInfo);
+  }
+
+  handleReset = () => {
+    try {
+      localStorage.clear();
+    } catch {}
+    window.location.reload();
+  };
+
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div className="min-h-screen bg-[#050505] text-white flex flex-col items-center justify-center p-6 text-center">
+          <div className="max-w-md p-8 rounded-2xl bg-[#0c0c0e] border border-white/10 shadow-2xl space-y-4">
+            <div className="w-12 h-12 mx-auto rounded-xl bg-white/[0.05] border border-white/10 flex items-center justify-center">
+              <span className="text-xl font-bold">GT</span>
+            </div>
+            <h1 className="text-xl font-bold font-heading">Gianitech Importados</h1>
+            <p className="text-xs text-zinc-400">
+              Ocurrió un error al cargar la vista del catálogo. Tocá el botón para restaurar y abrir la tienda:
+            </p>
+            <button
+              onClick={this.handleReset}
+              className="w-full py-3 px-4 rounded-xl bg-white text-black font-semibold text-sm hover:bg-zinc-200 transition-all cursor-pointer"
+            >
+              Reiniciar y Cargar Catálogo
+            </button>
+          </div>
+        </div>
+      );
+    }
+    return this.props.children;
+  }
+}
+
 export default function App() {
   return (
-    <CartProvider>
-      <MainApp />
-    </CartProvider>
+    <ErrorBoundary>
+      <CartProvider>
+        <MainApp />
+      </CartProvider>
+    </ErrorBoundary>
   );
 }
