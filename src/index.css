@@ -1,0 +1,327 @@
+@import "tailwindcss";
+
+@theme {
+  --font-space: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-oswald: 'Oswald', sans-serif;
+  --font-montserrat: 'Montserrat', sans-serif;
+  --font-inter: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-manrope: 'Manrope', sans-serif;
+  --font-dmsans: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  
+  --font-jakarta: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-outfit: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-syne: 'Syne', sans-serif;
+  --font-unbounded: 'Unbounded', sans-serif;
+  
+  --font-heading: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-display: 'Plus Jakarta Sans', sans-serif;
+  --font-banner: 'Outfit', sans-serif;
+  --font-nav: 'Montserrat', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-commercial: 'DM Sans', sans-serif;
+  --font-price: 'DM Sans', sans-serif;
+}
+
+.font-jakarta {
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.font-outfit {
+  font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.font-syne {
+  font-family: 'Syne', sans-serif;
+}
+
+.font-unbounded {
+  font-family: 'Unbounded', sans-serif;
+}
+
+@layer base {
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: #050505;
+    color: #f5f5f7;
+    overflow-x: hidden;
+  }
+
+  /* Encabezados y títulos principales: Space Grotesk */
+  h1, h2, h3, h4, h5, h6, .font-heading, .font-space {
+    font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+    letter-spacing: -0.025em;
+  }
+
+  /* Subtítulos y navegación: Montserrat */
+  nav, .font-nav, .font-montserrat {
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: -0.01em;
+  }
+
+  /* Descripciones y contenido general: Inter */
+  p, .font-body, .font-inter {
+    font-family: 'Inter', sans-serif;
+  }
+
+  /* Titulares comerciales y frases promocionales: Manrope */
+  .font-promo, .font-manrope {
+    font-family: 'Manrope', sans-serif;
+  }
+
+  /* Títulos impactantes para banners: Oswald */
+  .font-banner, .font-oswald {
+    font-family: 'Oswald', sans-serif;
+    letter-spacing: 0.02em;
+  }
+
+  /* Precios, botones, etiquetas y textos comerciales: DM Sans */
+  button, .font-commercial, .font-price, .font-dmsans, .price-display {
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .font-mono, .tabular-nums {
+    font-family: 'DM Sans', sans-serif !important;
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* Obsidian canvas with subtle luxury Apple-grade lighting */
+.bg-obsidian-canvas {
+  background-color: #050505;
+  background-image: 
+    radial-gradient(ellipse 80% 50% at 50% -15%, rgba(255, 255, 255, 0.06), transparent 70%),
+    radial-gradient(ellipse 50% 30% at 90% 25%, rgba(255, 255, 255, 0.025), transparent 60%),
+    radial-gradient(ellipse 60% 40% at 10% 55%, rgba(255, 255, 255, 0.02), transparent 50%),
+    linear-gradient(to bottom, #050505 0%, #080808 50%, #050505 100%);
+}
+
+/* Studio product card with ultra-fine border and soft depth */
+.studio-card {
+  background: #080808;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.studio-card:hover {
+  background: #0c0c0e;
+  border-color: rgba(255, 255, 255, 0.22);
+  transform: translateY(-2px);
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.9), 0 0 35px -8px rgba(255, 255, 255, 0.08);
+}
+
+/* Apple-style Frosted Glass Surface */
+.glass-surface {
+  background: rgba(8, 8, 8, 0.72);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Luxury Glow Effects */
+.glow-spotlight {
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 255, 255, 0.16) 0%,
+    rgba(210, 225, 255, 0.09) 25%,
+    rgba(147, 197, 253, 0.04) 45%,
+    transparent 70%
+  );
+  filter: blur(35px);
+}
+
+.glow-ambient-pulse {
+  animation: glowPulse 7s ease-in-out infinite alternate;
+}
+
+@keyframes glowPulse {
+  0% {
+    opacity: 0.55;
+    transform: scale(0.96);
+  }
+  50% {
+    opacity: 0.85;
+    transform: scale(1.04);
+  }
+  100% {
+    opacity: 0.55;
+    transform: scale(0.96);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.animate-shimmer {
+  animation: shimmer 1.8s infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(16, 185, 129, 0.2), inset 0 0 10px rgba(16, 185, 129, 0.05);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(16, 185, 129, 0.45), inset 0 0 15px rgba(16, 185, 129, 0.12);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 3s ease-in-out infinite;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 28s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+@keyframes popIn {
+  0% {
+    transform: scale(0.85);
+    opacity: 0;
+  }
+  70% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.animate-pop-in {
+  animation: popIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.glow-btn-hover:hover {
+  box-shadow: 0 0 28px rgba(255, 255, 255, 0.22), 0 4px 18px rgba(0, 0, 0, 0.6);
+}
+
+/* 3 Core Button Styles requested in Section 10 */
+/* 1. Principal: fondo blanco o plateado, texto negro y forma ligeramente redondeada */
+.btn-primary {
+  font-family: 'DM Sans', sans-serif;
+  background: #f5f5f7;
+  color: #000000;
+  font-weight: 700;
+  border-radius: 0.625rem;
+  padding: 0.75rem 1.375rem;
+  font-size: 0.875rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+}
+
+.btn-primary:hover {
+  background: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(255, 255, 255, 0.15);
+}
+
+.btn-primary:active {
+  transform: scale(0.98);
+}
+
+/* 2. Secundario: fondo transparente, borde gris y texto blanco */
+.btn-secondary {
+  font-family: 'DM Sans', sans-serif;
+  background: transparent;
+  color: #f5f5f7;
+  font-weight: 600;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 0.625rem;
+  padding: 0.75rem 1.375rem;
+  font-size: 0.875rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.35);
+  color: #ffffff;
+}
+
+.btn-secondary:active {
+  transform: scale(0.98);
+}
+
+/* 3. Terciario: texto blanco o gris con una flecha minimalista */
+.btn-tertiary {
+  font-family: 'DM Sans', sans-serif;
+  background: transparent;
+  color: #a1a1a6;
+  font-weight: 600;
+  font-size: 0.875rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  transition: all 0.2s ease-in-out;
+  padding: 0.25rem 0;
+}
+
+.btn-tertiary:hover {
+  color: #ffffff;
+}
+
+.btn-tertiary:hover .arrow-icon {
+  transform: translateX(4px);
+}
+
+.arrow-icon {
+  transition: transform 0.2s ease-out;
+}
+
+/* Minimalist dark scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #050505;
+}
+::-webkit-scrollbar-thumb {
+  background: #1c1c1e;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #2c2c2e;
+}
