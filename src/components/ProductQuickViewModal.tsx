@@ -25,11 +25,7 @@ export const ProductQuickViewModal: React.FC = () => {
   const activeWholesaleTier = quickViewProduct.wholesale[selectedTierIdx] || quickViewProduct.wholesale[0];
 
   const handleAddToCart = () => {
-    if (channel === 'minorista' && !quickViewProduct.wholesaleOnly) {
-      addToCart(quickViewProduct, 1);
-    } else {
-      addToCart(quickViewProduct, activeWholesaleTier.units, activeWholesaleTier.units);
-    }
+    addToCart(quickViewProduct, 1);
     setIsAdded(true);
     setTimeout(() => {
       setIsAdded(false);
@@ -119,53 +115,22 @@ export const ProductQuickViewModal: React.FC = () => {
                   )}
                 </div>
 
-                {/* Channel Switcher within Modal */}
-                {quickViewProduct.wholesaleOnly ? (
-                  <div className="p-2.5 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-between text-xs text-amber-300 font-semibold px-3.5">
-                    <span>Artículo Exclusivo Catálogo Mayorista</span>
-                    <span className="text-[10px] bg-amber-500/20 px-2 py-0.5 rounded text-amber-200 uppercase font-bold">Solo Mayorista</span>
-                  </div>
-                ) : (
-                  <div className="p-1 rounded-xl bg-[#0c0c0e] border border-white/[0.08] flex items-center">
-                    <button
-                      onClick={() => setChannel('minorista')}
-                      className={`flex-1 py-1.5 rounded-lg text-xs font-dmsans font-bold transition-all ${
-                        channel === 'minorista'
-                          ? 'bg-white text-black shadow-sm'
-                          : 'text-[#86868b] hover:text-white'
-                      }`}
-                    >
-                      Ver Precios Minoristas
-                    </button>
-                    <button
-                      onClick={() => setChannel('mayorista')}
-                      className={`flex-1 py-1.5 rounded-lg text-xs font-dmsans font-bold transition-all ${
-                        channel === 'mayorista'
-                          ? 'bg-white text-black shadow-sm'
-                          : 'text-[#86868b] hover:text-white'
-                      }`}
-                    >
-                      Ver Escalas Mayoristas
-                    </button>
-                  </div>
-                )}
-
                 {/* Pricing Box - PESOS ARS Y DÓLARES USD */}
-                {channel === 'minorista' && !quickViewProduct.wholesaleOnly ? (
-                  <div className="p-3.5 rounded-xl bg-[#050505] border border-white/[0.08] space-y-2">
-                    <div className="flex items-center justify-between">
-                      <span className="text-xs text-emerald-400 font-bold uppercase">
-                        Precio Efectivo:
+                <div className="p-3.5 rounded-xl bg-[#050505] border border-white/[0.08] space-y-2">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs text-emerald-400 font-bold uppercase">
+                      Precio Efectivo:
+                    </span>
+                    <div className="flex items-baseline gap-2">
+                      <span className="font-dmsans text-xl font-bold text-white tabular-nums">
+                        {formatArs(quickViewProduct.retail?.efectivo || quickViewProduct.wholesale[0]?.priceArs || 0)}
                       </span>
-                      <div className="flex items-baseline gap-2">
-                        <span className="font-dmsans text-xl font-bold text-white tabular-nums">
-                          {formatArs(quickViewProduct.retail.efectivo)}
-                        </span>
-                        <span className="text-xs font-dmsans font-extrabold text-emerald-400 tabular-nums bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">
-                          {formatUsd(Math.round(quickViewProduct.retail.efectivo / USD_RATE))} USD
-                        </span>
-                      </div>
+                      <span className="text-xs font-dmsans font-extrabold text-emerald-400 tabular-nums bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">
+                        {formatUsd(Math.round((quickViewProduct.retail?.efectivo || quickViewProduct.wholesale[0]?.priceArs || 0) / USD_RATE))} USD
+                      </span>
                     </div>
+                  </div>
+                  {quickViewProduct.retail?.transferencia ? (
                     <div className="flex items-center justify-between text-xs text-zinc-400">
                       <span>Transferencia bancaria:</span>
                       <div className="flex items-baseline gap-1.5">
@@ -177,60 +142,16 @@ export const ProductQuickViewModal: React.FC = () => {
                         </span>
                       </div>
                     </div>
+                  ) : null}
+                  {quickViewProduct.retail?.cuotas6 ? (
                     <div className="flex items-center justify-between text-xs text-zinc-400 border-t border-white/[0.06] pt-1.5">
                       <span>6 cuotas sin interés:</span>
                       <span className="font-dmsans text-white font-medium tabular-nums">
                         {formatArs(quickViewProduct.retail.cuotas6)}
                       </span>
                     </div>
-                  </div>
-                ) : (
-                  <div className="p-3.5 rounded-xl bg-[#050505] border border-white/[0.08] space-y-2.5">
-                    <div className="text-[10px] uppercase font-montserrat tracking-wider text-[#86868b]">
-                      Seleccionar Escala de Volumen
-                    </div>
-                    <div className="grid grid-cols-3 gap-1.5">
-                      {quickViewProduct.wholesale.map((tier, idx) => (
-                        <button
-                          key={tier.label}
-                          onClick={() => setSelectedTierIdx(idx)}
-                          className={`py-2 px-1 rounded-lg text-xs font-dmsans font-bold border transition-all cursor-pointer ${
-                            selectedTierIdx === idx
-                              ? 'bg-white text-black border-white shadow-md'
-                              : 'bg-[#0c0c0e] text-zinc-400 border-white/[0.08] hover:border-white/20'
-                          }`}
-                        >
-                          <div className="text-xs">{tier.label}</div>
-                          <div className="text-[11.5px] font-bold text-emerald-400">{formatUsd(tier.priceUsd)}</div>
-                          <div className="text-[9.5px] text-zinc-400 font-medium">{formatArs(tier.priceArs)}</div>
-                        </button>
-                      ))}
-                    </div>
-
-                    <div className="pt-2 border-t border-white/[0.06] flex items-baseline justify-between">
-                      <div>
-                        <div className="text-[10px] text-[#86868b]">Precio unitario ({activeWholesaleTier.label}):</div>
-                        <div className="flex items-baseline gap-2">
-                          <span className="font-dmsans text-xl font-black text-white tabular-nums">
-                            {formatUsd(activeWholesaleTier.priceUsd)} USD
-                          </span>
-                          <span className="text-xs text-zinc-400 font-dmsans">
-                            ({formatArs(activeWholesaleTier.priceArs)})
-                          </span>
-                        </div>
-                      </div>
-                      <div className="text-right">
-                        <div className="text-[10px] text-[#86868b]">Total escala ({activeWholesaleTier.units}u):</div>
-                        <div className="font-dmsans text-base font-bold text-emerald-400 tabular-nums">
-                          {formatUsd(activeWholesaleTier.priceUsd * activeWholesaleTier.units)} USD
-                        </div>
-                        <div className="text-[10px] text-zinc-400 font-dmsans tabular-nums">
-                          {formatArs(activeWholesaleTier.priceArs * activeWholesaleTier.units)}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                )}
+                  ) : null}
+                </div>
               </div>
             </div>
           </div>
@@ -253,11 +174,7 @@ export const ProductQuickViewModal: React.FC = () => {
               ) : (
                 <>
                   <ShoppingBag className="w-4 h-4" />
-                  <span>
-                    {channel === 'minorista'
-                      ? 'AGREGAR AL CARRITO (1u)'
-                      : `AGREGAR ESCALA ${activeWholesaleTier.label}`}
-                  </span>
+                  <span>AGREGAR AL PEDIDO</span>
                 </>
               )}
             </button>

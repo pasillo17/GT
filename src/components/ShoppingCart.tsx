@@ -54,7 +54,7 @@ export const ShoppingCart: React.FC = () => {
                 </h2>
               </div>
               <div className="text-[10px] text-zinc-400 font-dmsans">
-                Modo: <strong className="text-white uppercase">{channel}</strong> · GIANITECH OFICIAL
+                GIANITECH IMPORTADOS · CATÁLOGO OFICIAL
               </div>
             </div>
 
@@ -87,7 +87,7 @@ export const ShoppingCart: React.FC = () => {
                     Tu lista está vacía
                   </h3>
                   <p className="text-xs text-[#86868b] font-inter max-w-xs mx-auto">
-                    Agregá productos desde el catálogo minorista o mayorista para armar tu cotización.
+                    Agregá productos desde el catálogo para armar tu pedido por WhatsApp.
                   </p>
                 </div>
                 <button

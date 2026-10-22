@@ -101,30 +101,6 @@ export const Header: React.FC<HeaderProps> = ({ onNavigate }) => {
                   Showroom
                 </button>
               </nav>
-
-              {/* Mode Pill in Header */}
-              <div className="flex items-center p-0.5 rounded-lg bg-[#0c0c0e] border border-white/[0.1]">
-                <button
-                  onClick={() => setChannel('minorista')}
-                  className={`px-3 py-1 rounded-md text-[11px] font-dmsans font-bold transition-all cursor-pointer ${
-                    channel === 'minorista'
-                      ? 'bg-white text-black shadow-sm'
-                      : 'text-[#86868b] hover:text-white'
-                  }`}
-                >
-                  Minorista
-                </button>
-                <button
-                  onClick={() => setChannel('mayorista')}
-                  className={`px-3 py-1 rounded-md text-[11px] font-dmsans font-bold transition-all cursor-pointer ${
-                    channel === 'mayorista'
-                      ? 'bg-white text-black shadow-sm'
-                      : 'text-[#86868b] hover:text-white'
-                  }`}
-                >
-                  Mayorista
-                </button>
-              </div>
             </div>
 
             {/* Right: Actions */}
@@ -207,42 +183,7 @@ export const Header: React.FC<HeaderProps> = ({ onNavigate }) => {
             </div>
           </div>
 
-          {/* Mode Switcher in Mobile Drawer */}
-          <div className="p-3 rounded-xl bg-[#0e0e11] border border-white/[0.1] space-y-2">
-            <div className="text-[10px] font-montserrat uppercase tracking-wider text-[#86868b]">
-              Modo de Catálogo Activo
-            </div>
-            <div className="grid grid-cols-2 gap-2">
-              <button
-                onClick={() => {
-                  setChannel('minorista');
-                  setMobileMenuOpen(false);
-                }}
-                className={`py-2 rounded-lg text-xs font-dmsans font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
-                  channel === 'minorista'
-                    ? 'bg-white text-black shadow-md'
-                    : 'bg-[#151518] text-zinc-400'
-                }`}
-              >
-                <ShoppingBag className="w-3.5 h-3.5" />
-                <span>Minorista (1u)</span>
-              </button>
-              <button
-                onClick={() => {
-                  setChannel('mayorista');
-                  setMobileMenuOpen(false);
-                }}
-                className={`py-2 rounded-lg text-xs font-dmsans font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
-                  channel === 'mayorista'
-                    ? 'bg-white text-black shadow-md'
-                    : 'bg-[#151518] text-zinc-400'
-                }`}
-              >
-                <Package className="w-3.5 h-3.5" />
-                <span>Mayorista (5u+)</span>
-              </button>
-            </div>
-          </div>
+
 
           {/* Main Navigation links */}
           <div className="space-y-1">

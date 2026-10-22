@@ -61,12 +61,8 @@ export const FavoritesModal: React.FC = () => {
             ) : (
               <div className="space-y-2.5 sm:space-y-3">
                 {favoriteProducts.map((product) => {
-                  const priceArs = channel === 'minorista'
-                    ? product.retail.efectivo
-                    : product.wholesale[0].priceArs;
-                  const priceUsd = channel === 'minorista'
-                    ? Math.round(priceArs / 1250)
-                    : product.wholesale[0].priceUsd;
+                  const priceArs = product.retail?.efectivo || product.wholesale[0]?.priceArs || 0;
+                  const priceUsd = Math.round(priceArs / 1250);
 
                   return (
                     <div
@@ -93,7 +89,7 @@ export const FavoritesModal: React.FC = () => {
 
                       <div className="flex-1 min-w-0 space-y-0.5 sm:space-y-1">
                         <div className="text-[9.5px] uppercase font-montserrat text-[#86868b] truncate">
-                          {product.brand} · Pág. {product.page}
+                          {product.brand}
                         </div>
                         <h4
                           onClick={() => {
@@ -112,13 +108,7 @@ export const FavoritesModal: React.FC = () => {
 
                       <div className="flex items-center gap-1.5">
                         <button
-                          onClick={() => {
-                            if (channel === 'minorista') {
-                              addToCart(product, 1);
-                            } else {
-                              addToCart(product, 5, 5);
-                            }
-                          }}
+                          onClick={() => addToCart(product, 1)}
                           className="p-2 sm:p-2.5 rounded-lg bg-white hover:bg-zinc-200 text-black font-dmsans text-xs font-bold transition-all min-h-[38px] min-w-[38px] flex items-center justify-center active:scale-95 cursor-pointer"
                           title="Mover al pedido"
                         >

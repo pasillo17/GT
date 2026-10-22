@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { CartProvider } from './context/CartContext';
 import { Header } from './components/Header';
-import { ChannelSelectorBar } from './components/ChannelSelectorBar';
-import { Hero } from './components/Hero';
 import { LiveTickerBar } from './components/LiveTickerBar';
 import { CategoryBanner } from './components/CategoryBanner';
 import { ProductGrid } from './components/ProductGrid';
@@ -37,16 +35,7 @@ function MainApp() {
       {/* Encabezado y Navegación Principal */}
       <Header onNavigate={scrollToSection} />
 
-      {/* Selector de Catálogo Minorista / Mayorista */}
-      <ChannelSelectorBar />
-
-      <main className="flex-1">
-        {/* Hero Principal */}
-        <Hero
-          onExploreProducts={() => scrollToSection('productos')}
-          onExploreOffers={() => scrollToSection('categorias')}
-        />
-
+      <main id="inicio" className="flex-1">
         {/* Live Scrolling Trust Ticker */}
         <LiveTickerBar />
 

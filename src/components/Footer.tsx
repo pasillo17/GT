@@ -55,7 +55,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onSelectCategory }) 
             <div className="pt-1 space-y-2.5">
               <a
                 href={`https://wa.me/${GIANITECH_CONTACT.whatsappDigits}?text=${encodeURIComponent(
-                  `¡Hola Gianitech! 👋 Quiero consultar stock y cotización para compras del catálogo ${channel === 'mayorista' ? 'Mayorista (5u+)' : 'Minorista'}. ¿Tienen disponibilidad inmediata?`
+                  `¡Hola Gianitech! 👋 Quiero consultar stock y cotización para compras del catálogo oficial. ¿Tienen disponibilidad inmediata?`
                 )}`}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -82,36 +82,26 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onSelectCategory }) 
           {/* Navigation Links (3 cols) */}
           <div className="lg:col-span-3 space-y-2.5 sm:space-y-3">
             <h4 className="text-[11px] sm:text-xs uppercase tracking-widest text-[#d1d1d6] font-montserrat font-bold">
-              Catálogos Activos
+              Navegación
             </h4>
             <div className="space-y-2 text-xs text-[#86868b] font-inter">
               <button
-                onClick={() => {
-                  setChannel('minorista');
-                  onNavigate('productos');
-                }}
-                className={`block text-left py-1 transition-colors ${
-                  channel === 'minorista' ? 'text-white font-bold' : 'hover:text-white'
-                }`}
+                onClick={() => onNavigate('productos')}
+                className="block text-left py-1 hover:text-white transition-colors cursor-pointer"
               >
-                • Catálogo Minorista (1u - 6 Cuotas / Efectivo)
+                • Ver Catálogo Completo
               </button>
               <button
-                onClick={() => {
-                  setChannel('mayorista');
-                  onNavigate('productos');
-                }}
-                className={`block text-left py-1 transition-colors ${
-                  channel === 'mayorista' ? 'text-white font-bold' : 'hover:text-white'
-                }`}
+                onClick={() => onNavigate('categorias')}
+                className="block text-left py-1 hover:text-white transition-colors cursor-pointer"
               >
-                • Catálogo Mayorista (Escalas 5u, 10u, 30u)
+                • Secciones & Categorías
               </button>
               <button
                 onClick={() => onNavigate('inicio')}
-                className="block text-left py-1 hover:text-white transition-colors"
+                className="block text-left py-1 hover:text-white transition-colors cursor-pointer"
               >
-                • Inicio & Banners
+                • Inicio
               </button>
               <button
                 onClick={() => onNavigate('contacto')}

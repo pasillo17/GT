@@ -8,21 +8,15 @@ interface ProductCardProps {
 }
 
 export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
-  const { addToCart, toggleFavorite, isFavorite, channel, setQuickViewProduct } = useCart();
-  const [selectedWholesaleTierIdx, setSelectedWholesaleTierIdx] = useState(0);
+  const { addToCart, toggleFavorite, isFavorite, setQuickViewProduct } = useCart();
   const [isAdded, setIsAdded] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
 
   const favorited = isFavorite(product.id);
-  const activeWholesaleTier = product.wholesale[selectedWholesaleTierIdx] || product.wholesale[0];
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.stopPropagation();
-    if (channel === 'minorista') {
-      addToCart(product, 1);
-    } else {
-      addToCart(product, activeWholesaleTier?.units || 5, activeWholesaleTier?.units || 5);
-    }
+    addToCart(product, 1);
     setIsAdded(true);
     setTimeout(() => setIsAdded(false), 1400);
   };
@@ -126,67 +120,28 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
         {/* Pricing Layout - PESOS ARS Y DÓLARES USD */}
         <div className="pt-2 border-t border-white/[0.06] space-y-2">
-          {channel === 'minorista' ? (
-            /* MINORISTA PRICING (Pesos ARS & Dólares USD) */
-            <div className="space-y-1">
-              <div className="flex items-baseline justify-between gap-1">
-                <span className="text-[9px] uppercase tracking-wider font-bold text-emerald-400">
-                  Efectivo
+          <div className="space-y-1">
+            <div className="flex items-baseline justify-between gap-1">
+              <span className="text-[9px] uppercase tracking-wider font-bold text-emerald-400">
+                Efectivo
+              </span>
+              <div className="flex items-baseline gap-1.5 text-right">
+                <span className="font-dmsans text-[13px] sm:text-base font-black text-white tabular-nums">
+                  {formatArs(product.retail?.efectivo || product.wholesale[0]?.priceArs || 0)}
                 </span>
-                <div className="flex items-baseline gap-1.5 text-right">
-                  <span className="font-dmsans text-[13px] sm:text-base font-black text-white tabular-nums">
-                    {formatArs(product.retail.efectivo)}
-                  </span>
-                  <span className="text-[10px] sm:text-[11px] font-dmsans font-extrabold text-emerald-400 tabular-nums">
-                    {formatUsd(Math.round(product.retail.efectivo / USD_RATE))}
-                  </span>
-                </div>
+                <span className="text-[10px] sm:text-[11px] font-dmsans font-extrabold text-emerald-400 tabular-nums">
+                  {formatUsd(Math.round((product.retail?.efectivo || product.wholesale[0]?.priceArs || 0) / USD_RATE))}
+                </span>
               </div>
+            </div>
 
+            {product.retail?.transferencia ? (
               <div className="flex items-center justify-between text-[9px] sm:text-[10px] text-[#86868b] pt-0.5">
                 <span>Transf: {formatArs(product.retail.transferencia)}</span>
-                <span className="text-zinc-400">6x {formatArs(Math.round(product.retail.cuotas6 / 6))}</span>
+                <span className="text-zinc-400">6x {formatArs(Math.round((product.retail.cuotas6 || product.retail.efectivo) / 6))}</span>
               </div>
-            </div>
-          ) : (
-            /* MAYORISTA PRICING (Escalas 5u, 10u, 30u con USD y ARS) */
-            <div className="space-y-1.5">
-              {/* Scale Selector Tabs */}
-              <div className="grid grid-cols-3 gap-1 p-0.5 rounded-lg bg-[#050505] border border-white/[0.08]">
-                {product.wholesale.map((tier, idx) => (
-                  <button
-                    key={tier.label}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setSelectedWholesaleTierIdx(idx);
-                    }}
-                    className={`py-0.5 text-[9px] font-dmsans font-bold rounded transition-all cursor-pointer ${
-                      selectedWholesaleTierIdx === idx
-                        ? 'bg-white text-black shadow-sm'
-                        : 'text-[#86868b] hover:text-white'
-                    }`}
-                  >
-                    x{tier.label}
-                  </button>
-                ))}
-              </div>
-
-              {/* Unit Price in USD & ARS */}
-              <div className="flex items-baseline justify-between pt-0.5">
-                <span className="text-[9px] uppercase text-[#86868b] font-dmsans font-semibold">
-                  Unitario ({activeWholesaleTier.label}):
-                </span>
-                <div className="flex items-baseline gap-1.5 text-right">
-                  <span className="font-dmsans text-[13px] sm:text-base font-black text-white tabular-nums">
-                    {formatUsd(activeWholesaleTier.priceUsd)}
-                  </span>
-                  <span className="text-[9.5px] sm:text-[10.5px] font-dmsans font-semibold text-zinc-400 tabular-nums">
-                    ({formatArs(activeWholesaleTier.priceArs)})
-                  </span>
-                </div>
-              </div>
-            </div>
-          )}
+            ) : null}
+          </div>
 
           {/* Add to Cart Button */}
           <button
@@ -205,11 +160,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             ) : (
               <>
                 <ShoppingBag className="w-3.5 h-3.5 stroke-[2]" />
-                <span className="truncate">
-                  {channel === 'minorista'
-                    ? 'AGREGAR 1u'
-                    : `PEDIR ${activeWholesaleTier.label}`}
-                </span>
+                <span className="truncate">AGREGAR AL PEDIDO</span>
               </>
             )}
           </button>

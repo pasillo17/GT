@@ -70,7 +70,7 @@ export const UserCareModal: React.FC = () => {
               </div>
               <div className="pt-1 flex flex-col sm:flex-row gap-2">
                 <a
-                  href={`https://wa.me/${GIANITECH_CONTACT.whatsappDigits}?text=${encodeURIComponent(`Hola Gianitech! Quiero consultar stock del catálogo ${channel}.`)}`}
+                  href={`https://wa.me/${GIANITECH_CONTACT.whatsappDigits}?text=${encodeURIComponent(`Hola Gianitech! Quiero consultar stock y disponibilidad de productos del catálogo.`)}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex-1 py-2.5 px-3 rounded-lg bg-white text-black font-dmsans text-xs font-bold flex items-center justify-center gap-1.5 transition-colors cursor-pointer"

@@ -46,7 +46,7 @@ export const CategoryBanner: React.FC<CategoryBannerProps> = ({ onSelectCategory
                 Potencia en cada detalle.
               </h3>
               <p className="text-xs sm:text-base text-[#a1a1a6] font-inter font-normal leading-relaxed max-w-md">
-                iPhones sellados, consolas PlayStation 5, parlantes JBL y cargadores oficiales en precios minoristas y escalas mayoristas.
+                iPhones sellados, consolas PlayStation 5, parlantes JBL y cargadores oficiales con stock inmediato y entrega garantizada.
               </p>
               <div className="pt-1 sm:pt-2">
                 <button

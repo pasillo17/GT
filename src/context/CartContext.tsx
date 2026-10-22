@@ -271,7 +271,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     if (items.length === 0) return;
 
     let message = `*ORDEN DE COMPRA — ${GIANITECH_CONTACT.fullName}*\n`;
-    message += `📋 *Modo:* Catálogo ${channel.toUpperCase()}\n`;
+    message += `📋 *Catálogo Oficial Online*\n`;
     message += `────────────────────────────\n`;
     if (customerName.trim()) message += `👤 *Cliente:* ${customerName.trim()}\n`;
     if (customerCity.trim()) message += `📍 *Destino / Retiro:* ${customerCity.trim()}\n`;

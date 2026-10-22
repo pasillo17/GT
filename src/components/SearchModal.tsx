@@ -71,12 +71,8 @@ export const SearchModal: React.FC<SearchModalProps> = ({ onSelectProduct }) => 
               </div>
             ) : (
               results.map((product) => {
-                const priceArs = channel === 'minorista'
-                  ? product.retail.efectivo
-                  : product.wholesale[0].priceArs;
-                const priceUsd = channel === 'minorista'
-                  ? Math.round(product.retail.efectivo / USD_RATE)
-                  : product.wholesale[0].priceUsd;
+                const priceArs = product.retail?.efectivo || product.wholesale[0]?.priceArs || 0;
+                const priceUsd = Math.round(priceArs / USD_RATE);
 
                 return (
                   <div
