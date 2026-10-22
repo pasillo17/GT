@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useCart } from '../context/CartContext';
-import { X, Heart, ShoppingBag, Check, MessageCircle, Package } from 'lucide-react';
+import { X, ShoppingBag, Check, MessageCircle, Package } from 'lucide-react';
 import { formatArs, formatUsd, GIANITECH_CONTACT, USD_RATE } from '../data/catalog';
 
 export const ProductQuickViewModal: React.FC = () => {
@@ -8,8 +8,6 @@ export const ProductQuickViewModal: React.FC = () => {
     quickViewProduct,
     setQuickViewProduct,
     addToCart,
-    isFavorite,
-    toggleFavorite,
     channel,
     setChannel,
     currency,
@@ -20,8 +18,6 @@ export const ProductQuickViewModal: React.FC = () => {
   const [modalImgLoaded, setModalImgLoaded] = useState(false);
 
   if (!quickViewProduct) return null;
-
-  const favorited = isFavorite(quickViewProduct.id);
   const activeWholesaleTier = quickViewProduct.wholesale[selectedTierIdx] || quickViewProduct.wholesale[0];
 
   const handleAddToCart = () => {
@@ -185,18 +181,6 @@ export const ProductQuickViewModal: React.FC = () => {
             >
               <MessageCircle className="w-4 h-4 text-emerald-400" />
               <span className="hidden sm:inline">WhatsApp</span>
-            </button>
-
-            <button
-              onClick={() => toggleFavorite(quickViewProduct.id)}
-              className="p-3 rounded-xl border border-white/[0.18] hover:border-white/40 text-white transition-all hover:bg-white/[0.04] min-h-[46px] min-w-[46px] flex items-center justify-center cursor-pointer"
-              title="Guardar en favoritos"
-            >
-              <Heart
-                className={`w-4 h-4 ${
-                  favorited ? 'fill-white text-white' : 'text-[#86868b]'
-                }`}
-              />
             </button>
           </div>
         </div>

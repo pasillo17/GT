@@ -100,6 +100,15 @@ export const Header: React.FC<HeaderProps> = ({ onNavigate }) => {
                 >
                   Showroom
                 </button>
+                <button
+                  onClick={() => {
+                    setChannel('mayorista');
+                    handleNavClick('productos');
+                  }}
+                  className="text-xs uppercase tracking-wider font-montserrat font-bold py-1.5 px-3 rounded-lg bg-white/[0.08] hover:bg-white text-white hover:text-black border border-white/20 transition-all cursor-pointer shadow-sm active:scale-95 ml-2"
+                >
+                  Catálogo Mayorista
+                </button>
               </nav>
             </div>
 
@@ -113,27 +122,6 @@ export const Header: React.FC<HeaderProps> = ({ onNavigate }) => {
                 aria-label="Buscar productos"
               >
                 <Search className="w-4 h-4 sm:w-5 sm:h-5 stroke-[1.5]" />
-              </button>
-
-              {/* User / Care Icon */}
-              <button
-                onClick={() => setIsUserModalOpen(true)}
-                className="p-2 sm:p-2.5 text-[#86868b] hover:text-white transition-colors focus:outline-none min-h-[40px] min-w-[40px] hidden sm:flex items-center justify-center cursor-pointer"
-                aria-label="Atención al cliente y garantía"
-              >
-                <User className="w-4 h-4 sm:w-5 sm:h-5 stroke-[1.5]" />
-              </button>
-
-              {/* Favorites Icon */}
-              <button
-                onClick={() => setIsFavoritesOpen(true)}
-                className="relative p-2 sm:p-2.5 text-[#86868b] hover:text-white transition-colors focus:outline-none min-h-[40px] min-w-[40px] hidden sm:flex items-center justify-center cursor-pointer"
-                aria-label="Ver favoritos"
-              >
-                <Heart className="w-4 h-4 sm:w-5 sm:h-5 stroke-[1.5]" />
-                {favorites.length > 0 && (
-                  <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-white shadow-[0_0_8px_white]" />
-                )}
               </button>
 
               {/* Cart Button */}
@@ -192,6 +180,16 @@ export const Header: React.FC<HeaderProps> = ({ onNavigate }) => {
             </span>
             <nav className="flex flex-col space-y-3 pt-2">
               <button
+                onClick={() => {
+                  setChannel('mayorista');
+                  handleNavClick('productos');
+                }}
+                className="w-full py-3 px-4 rounded-xl bg-white text-black font-dmsans text-sm font-bold flex items-center justify-between shadow-lg"
+              >
+                <span>Catálogo Mayorista</span>
+                <ArrowRight className="w-4 h-4 text-black" />
+              </button>
+              <button
                 onClick={() => handleNavClick('inicio')}
                 className="text-left text-lg font-heading font-bold text-white hover:text-zinc-300 py-1 flex items-center justify-between"
               >
@@ -220,36 +218,6 @@ export const Header: React.FC<HeaderProps> = ({ onNavigate }) => {
                 <ArrowRight className="w-4 h-4 text-[#86868b]" />
               </button>
             </nav>
-          </div>
-
-          {/* Quick Shortcuts */}
-          <div className="pt-2 border-t border-white/[0.08] space-y-3">
-            <span className="text-[10px] font-montserrat uppercase tracking-[0.25em] text-[#86868b] font-semibold">
-              Accesos Rápidos
-            </span>
-            <div className="grid grid-cols-2 gap-2.5">
-              <button
-                onClick={() => {
-                  setMobileMenuOpen(false);
-                  setIsFavoritesOpen(true);
-                }}
-                className="p-3 rounded-xl bg-[#0c0c0e] border border-white/[0.08] text-left flex items-center gap-2 text-xs text-white"
-              >
-                <Heart className="w-4 h-4 text-[#86868b]" />
-                <span>Favoritos ({favorites.length})</span>
-              </button>
-
-              <button
-                onClick={() => {
-                  setMobileMenuOpen(false);
-                  setIsUserModalOpen(true);
-                }}
-                className="p-3 rounded-xl bg-[#0c0c0e] border border-white/[0.08] text-left flex items-center gap-2 text-xs text-white"
-              >
-                <ShieldCheck className="w-4 h-4 text-[#86868b]" />
-                <span>Garantía & FAQ</span>
-              </button>
-            </div>
           </div>
 
           {/* Direct WhatsApp Callout */}

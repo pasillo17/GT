@@ -1,29 +1,22 @@
 import React, { useState } from 'react';
 import { DualProduct, formatArs, formatUsd, USD_RATE } from '../data/catalog';
 import { useCart } from '../context/CartContext';
-import { Heart, ShoppingBag, Check, Eye } from 'lucide-react';
+import { ShoppingBag, Check, Eye } from 'lucide-react';
 
 interface ProductCardProps {
   product: DualProduct;
 }
 
 export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
-  const { addToCart, toggleFavorite, isFavorite, setQuickViewProduct } = useCart();
+  const { addToCart, setQuickViewProduct } = useCart();
   const [isAdded, setIsAdded] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
-
-  const favorited = isFavorite(product.id);
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.stopPropagation();
     addToCart(product, 1);
     setIsAdded(true);
     setTimeout(() => setIsAdded(false), 1400);
-  };
-
-  const handleFavoriteClick = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    toggleFavorite(product.id);
   };
 
   const isAmberRomance = product.id === 'body-splash-victorias-secret-body-splash-amber-romance' || product.name.toUpperCase().includes('AMBER ROMANCE');
@@ -81,18 +74,6 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
               </span>
             ) : null}
           </div>
-
-          <button
-            onClick={handleFavoriteClick}
-            className="p-1 rounded-full bg-black/70 hover:bg-black/95 backdrop-blur-md border border-white/10 text-white transition-all pointer-events-auto focus:outline-none min-h-[30px] min-w-[30px] flex items-center justify-center active:scale-75 cursor-pointer shadow-sm group/fav"
-            aria-label={favorited ? 'Quitar de favoritos' : 'Agregar a favoritos'}
-          >
-            <Heart
-              className={`w-3 h-3 sm:w-3.5 sm:h-3.5 transition-all duration-200 ${
-                favorited ? 'fill-rose-500 text-rose-500 scale-110' : 'text-[#86868b] group-hover/fav:text-white'
-              }`}
-            />
-          </button>
         </div>
 
         {/* Desktop Quick View Hint */}

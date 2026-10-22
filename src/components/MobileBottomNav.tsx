@@ -1,7 +1,6 @@
 import React from 'react';
 import { useCart } from '../context/CartContext';
-import { Home, LayoutGrid, Search, Heart, ShoppingBag } from 'lucide-react';
-import { formatArs, formatUsd } from '../data/catalog';
+import { Home, LayoutGrid, Search, Package, ShoppingBag } from 'lucide-react';
 
 interface MobileBottomNavProps {
   onNavigate: (sectionId: string) => void;
@@ -11,12 +10,8 @@ export const MobileBottomNav: React.FC<MobileBottomNavProps> = ({ onNavigate }) 
   const {
     totalUnits,
     setIsCartOpen,
-    favorites,
-    setIsFavoritesOpen,
     setIsSearchOpen,
-    totalPriceUsd,
-    totalPriceArs,
-    currency,
+    setChannel,
   } = useCart();
 
   return (
@@ -52,21 +47,17 @@ export const MobileBottomNav: React.FC<MobileBottomNavProps> = ({ onNavigate }) 
           <span className="text-[10px] font-montserrat mt-1">Buscar</span>
         </button>
 
-        {/* 4. Favoritos */}
+        {/* 4. Mayorista */}
         <button
-          onClick={() => setIsFavoritesOpen(true)}
-          className="relative flex flex-col items-center justify-center py-1 text-[#86868b] hover:text-white transition-colors focus:outline-none min-h-[44px]"
-          aria-label="Ver productos favoritos"
+          onClick={() => {
+            setChannel('mayorista');
+            onNavigate('productos');
+          }}
+          className="flex flex-col items-center justify-center py-1 text-[#86868b] hover:text-white transition-colors focus:outline-none min-h-[44px]"
+          aria-label="Ver catálogo mayorista"
         >
-          <div className="relative">
-            <Heart className="w-5 h-5 stroke-[1.5]" />
-            {favorites.length > 0 && (
-              <span className="absolute -top-1 -right-2 min-w-4 h-4 px-1 rounded-full bg-white text-black text-[9px] font-dmsans font-bold flex items-center justify-center">
-                {favorites.length}
-              </span>
-            )}
-          </div>
-          <span className="text-[10px] font-montserrat mt-1">Favoritos</span>
+          <Package className="w-5 h-5 stroke-[1.5]" />
+          <span className="text-[10px] font-montserrat mt-1">Mayorista</span>
         </button>
 
         {/* 5. Carrito */}
