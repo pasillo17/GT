@@ -61,10 +61,15 @@ export const ProductQuickViewModal: React.FC = () => {
               {(() => {
                 const isAmber = quickViewProduct.id === 'body-splash-victorias-secret-body-splash-amber-romance' || quickViewProduct.name.toUpperCase().includes('AMBER ROMANCE');
                 const isJoystick = quickViewProduct.id === 'tecnologia-sony-joystick-ps4' || quickViewProduct.name.toLowerCase().includes('joystick ps4');
-                const needsZoom = isAmber || isJoystick;
+                const isSamsung =
+                  quickViewProduct.id === 'tecnologia-samsung-samsung-a06-464' ||
+                  quickViewProduct.id === 'tecnologia-samsung-samsung-a36-256gb' ||
+                  quickViewProduct.name.toUpperCase().includes('A06') ||
+                  quickViewProduct.name.toUpperCase().includes('A36');
+                const needsZoom = isAmber || isJoystick || isSamsung;
                 return (
                   <div className={`md:col-span-5 relative aspect-square rounded-xl bg-[#050505] border border-white/[0.08] flex items-center justify-center overflow-hidden ${
-                    needsZoom ? 'p-1 sm:p-2' : 'p-4'
+                    isSamsung ? 'p-2 sm:p-2.5' : needsZoom ? 'p-1 sm:p-2' : 'p-4'
                   }`}>
                     <div className="absolute inset-0 bg-radial from-white/[0.05] to-transparent pointer-events-none" />
                     {!modalImgLoaded && (
@@ -79,7 +84,9 @@ export const ProductQuickViewModal: React.FC = () => {
                       referrerPolicy="no-referrer"
                       onLoad={() => setModalImgLoaded(true)}
                       className={`w-full h-full object-contain filter contrast-105 transition-all duration-500 relative z-10 ${
-                        isJoystick
+                        isSamsung
+                          ? 'scale-[1.20] sm:scale-[1.20]'
+                          : isJoystick
                           ? 'scale-145 sm:scale-155'
                           : isAmber
                           ? 'scale-135 sm:scale-140'
