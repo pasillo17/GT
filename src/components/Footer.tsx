@@ -51,32 +51,6 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onSelectCategory }) 
               Catálogo oficial de tecnología Apple, smartphones de alta gama, consolas, perfumería importada y accesorios de vanguardia.
             </p>
 
-            {/* Direct Contact Buttons */}
-            <div className="pt-1 space-y-2.5">
-              <a
-                href={`https://wa.me/${GIANITECH_CONTACT.whatsappDigits}?text=${encodeURIComponent(
-                  `¡Hola Gianitech! 👋 Quiero consultar stock y cotización para compras del catálogo oficial. ¿Tienen disponibilidad inmediata?`
-                )}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full sm:w-auto p-2.5 px-4 rounded-xl bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 text-white transition-all flex items-center justify-center gap-2 font-dmsans text-xs group active:scale-98 shadow-[0_0_15px_rgba(16,185,129,0.1)] hover:shadow-[0_0_20px_rgba(16,185,129,0.25)]"
-              >
-                <MessageCircle className="w-4 h-4 text-emerald-400 group-hover:scale-110 transition-transform" />
-                <span className="font-semibold text-emerald-300">WhatsApp Oficial: {GIANITECH_CONTACT.whatsapp}</span>
-              </a>
-
-              <div className="flex items-center gap-2 text-xs text-[#86868b]">
-                <Instagram className="w-3.5 h-3.5 text-pink-400" />
-                <a
-                  href={GIANITECH_CONTACT.instagramUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-white transition-colors font-dmsans"
-                >
-                  {GIANITECH_CONTACT.instagram}
-                </a>
-              </div>
-            </div>
           </div>
 
           {/* Navigation Links (3 cols) */}
@@ -152,52 +126,11 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onSelectCategory }) 
           </div>
         </div>
 
-        {/* WhatsApp VIP Card "Abajo de Todo" */}
-        <div className="p-5 sm:p-7 rounded-2xl bg-gradient-to-r from-emerald-950/30 via-[#0d0d12] to-emerald-950/30 border border-emerald-500/25 backdrop-blur-md flex flex-col sm:flex-row items-center justify-between gap-5 text-center sm:text-left shadow-[0_0_35px_rgba(16,185,129,0.08)]">
-          <div className="flex flex-col sm:flex-row items-center gap-3.5 sm:gap-4">
-            <div className="w-12 h-12 rounded-2xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center shrink-0 shadow-[0_0_20px_rgba(16,185,129,0.25)]">
-              <MessageCircle className="w-6 h-6 text-emerald-400" />
-            </div>
-            <div>
-              <h5 className="font-heading text-base sm:text-lg font-bold text-white tracking-tight">
-                ¿Tenés dudas o buscás un producto en particular?
-              </h5>
-              <p className="text-xs sm:text-sm text-[#86868b] font-inter mt-0.5 max-w-xl">
-                Escribinos directamente al WhatsApp oficial. Te asesoramos al instante con fotos reales, stock actualizado y opciones de pago.
-              </p>
-            </div>
-          </div>
-          <a
-            href={`https://wa.me/${GIANITECH_CONTACT.whatsappDigits}?text=${encodeURIComponent(
-              `¡Hola Gianitech! 👋 Me encuentro al final del catálogo y me gustaría hacerles una consulta personalizada sobre disponibilidad de stock y envíos.`
-            )}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-black font-dmsans text-xs sm:text-sm font-bold transition-all shadow-[0_0_25px_rgba(16,185,129,0.35)] hover:shadow-[0_0_35px_rgba(16,185,129,0.55)] active:scale-95 shrink-0 cursor-pointer"
-            title="Escribir a WhatsApp con mensaje personalizado"
-          >
-            <MessageCircle className="w-4 h-4 fill-black text-black" />
-            <span>Chatear por WhatsApp</span>
-          </a>
-        </div>
+
 
         {/* Bottom Legal Bar */}
         <div className="pt-6 sm:pt-8 border-t border-white/[0.08] flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] sm:text-xs text-[#86868b] font-inter text-center sm:text-left">
-          <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4">
-            <span>© {new Date().getFullYear()} GIANITECH IMPORTADOS. Catálogo Oficial.</span>
-            <span className="hidden sm:inline text-white/20">•</span>
-            <a
-              href={`https://wa.me/${GIANITECH_CONTACT.whatsappDigits}?text=${encodeURIComponent(
-                `¡Hola Gianitech! 👋 Los contacto desde el final de la web para consultar disponibilidad de productos.`
-              )}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-emerald-400 hover:text-emerald-300 font-dmsans font-semibold transition-colors"
-            >
-              <MessageCircle className="w-3.5 h-3.5" />
-              <span>WhatsApp Directo: {GIANITECH_CONTACT.whatsapp}</span>
-            </a>
-          </div>
+          <span>© {new Date().getFullYear()} GIANITECH IMPORTADOS. Catálogo Oficial.</span>
           <div className="flex items-center gap-4 text-zinc-400">
             <span>Showroom Espacio Dual</span>
             <span>·</span>

@@ -20,6 +20,8 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   };
 
   const isAmberRomance = product.id === 'body-splash-victorias-secret-body-splash-amber-romance' || product.name.toUpperCase().includes('AMBER ROMANCE');
+  const isJoystickPs4 = product.id === 'tecnologia-sony-joystick-ps4' || product.name.toLowerCase().includes('joystick ps4');
+  const needsZoom = isAmberRomance || isJoystickPs4;
 
   return (
     <div
@@ -28,7 +30,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     >
       {/* Top Image Stage with Studio Lighting & Loading Shimmer */}
       <div className={`relative w-full aspect-square bg-[#080808] flex items-center justify-center overflow-hidden border-b border-white/[0.06] ${
-        isAmberRomance ? 'p-0.5 sm:p-1' : 'p-2.5 sm:p-4'
+        needsZoom ? 'p-0.5 sm:p-1' : 'p-2.5 sm:p-4'
       }`}>
         {/* Ambient Subtle Studio Radial Glow */}
         <div className="absolute inset-0 bg-radial from-white/[0.04] via-white/[0.01] to-transparent pointer-events-none group-hover:from-white/[0.08] transition-all duration-500" />
@@ -48,7 +50,9 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           referrerPolicy="no-referrer"
           onLoad={() => setImageLoaded(true)}
           className={`w-full h-full object-contain filter contrast-105 transition-all duration-700 ease-out relative z-10 ${
-            isAmberRomance
+            isJoystickPs4
+              ? 'scale-145 sm:scale-150 group-hover:scale-160'
+              : isAmberRomance
               ? 'scale-135 sm:scale-140 group-hover:scale-145'
               : 'scale-100 group-hover:scale-108'
           } ${

@@ -58,32 +58,39 @@ export const ProductQuickViewModal: React.FC = () => {
           <div className="overflow-y-auto pr-1 space-y-5 flex-1">
             <div className="grid grid-cols-1 md:grid-cols-12 gap-5 sm:gap-6 items-start">
               {/* Product Image Stage with Shimmer */}
-              <div className={`md:col-span-5 relative aspect-square rounded-xl bg-[#050505] border border-white/[0.08] flex items-center justify-center overflow-hidden ${
-                quickViewProduct.id === 'body-splash-victorias-secret-body-splash-amber-romance' || quickViewProduct.name.toUpperCase().includes('AMBER ROMANCE')
-                  ? 'p-1 sm:p-2'
-                  : 'p-4'
-              }`}>
-                <div className="absolute inset-0 bg-radial from-white/[0.05] to-transparent pointer-events-none" />
-                {!modalImgLoaded && (
-                  <div className="absolute inset-0 flex items-center justify-center bg-[#09090c] z-0 overflow-hidden">
-                    <div className="w-16 h-16 rounded-full bg-white/[0.04] animate-pulse" />
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.04] to-transparent animate-shimmer" />
+              {(() => {
+                const isAmber = quickViewProduct.id === 'body-splash-victorias-secret-body-splash-amber-romance' || quickViewProduct.name.toUpperCase().includes('AMBER ROMANCE');
+                const isJoystick = quickViewProduct.id === 'tecnologia-sony-joystick-ps4' || quickViewProduct.name.toLowerCase().includes('joystick ps4');
+                const needsZoom = isAmber || isJoystick;
+                return (
+                  <div className={`md:col-span-5 relative aspect-square rounded-xl bg-[#050505] border border-white/[0.08] flex items-center justify-center overflow-hidden ${
+                    needsZoom ? 'p-1 sm:p-2' : 'p-4'
+                  }`}>
+                    <div className="absolute inset-0 bg-radial from-white/[0.05] to-transparent pointer-events-none" />
+                    {!modalImgLoaded && (
+                      <div className="absolute inset-0 flex items-center justify-center bg-[#09090c] z-0 overflow-hidden">
+                        <div className="w-16 h-16 rounded-full bg-white/[0.04] animate-pulse" />
+                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.04] to-transparent animate-shimmer" />
+                      </div>
+                    )}
+                    <img
+                      src={quickViewProduct.image}
+                      alt={quickViewProduct.name}
+                      referrerPolicy="no-referrer"
+                      onLoad={() => setModalImgLoaded(true)}
+                      className={`w-full h-full object-contain filter contrast-105 transition-all duration-500 relative z-10 ${
+                        isJoystick
+                          ? 'scale-145 sm:scale-155'
+                          : isAmber
+                          ? 'scale-135 sm:scale-140'
+                          : 'scale-100'
+                      } ${
+                        modalImgLoaded ? 'opacity-100 blur-0' : 'opacity-0 scale-95 blur-sm'
+                      }`}
+                    />
                   </div>
-                )}
-                <img
-                  src={quickViewProduct.image}
-                  alt={quickViewProduct.name}
-                  referrerPolicy="no-referrer"
-                  onLoad={() => setModalImgLoaded(true)}
-                  className={`w-full h-full object-contain filter contrast-105 transition-all duration-500 relative z-10 ${
-                    quickViewProduct.id === 'body-splash-victorias-secret-body-splash-amber-romance' || quickViewProduct.name.toUpperCase().includes('AMBER ROMANCE')
-                      ? 'scale-135 sm:scale-140'
-                      : 'scale-100'
-                  } ${
-                    modalImgLoaded ? 'opacity-100 blur-0' : 'opacity-0 scale-95 blur-sm'
-                  }`}
-                />
-              </div>
+                );
+              })()}
 
               {/* Product Details */}
               <div className="md:col-span-7 space-y-4">

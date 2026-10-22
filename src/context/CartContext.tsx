@@ -106,9 +106,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     } catch {
       // ignore
     }
-    return [
-      { product: ALL_PRODUCTS[0], quantity: 5, channel: 'mayorista', wholesaleTierUnits: 5 }
-    ];
+    return [];
   });
 
   const [favorites, setFavorites] = useState<string[]>(() => {

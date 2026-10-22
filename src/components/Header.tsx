@@ -2,17 +2,14 @@ import React, { useState } from 'react';
 import { useCart } from '../context/CartContext';
 import {
   Search,
-  User,
-  Heart,
   ShoppingBag,
   Menu,
   X,
   ArrowRight,
-  ShieldCheck,
   MessageCircle,
+  Package,
   MapPin,
   Clock,
-  Package,
 } from 'lucide-react';
 import { GIANITECH_CONTACT } from '../data/catalog';
 
@@ -24,13 +21,9 @@ export const Header: React.FC<HeaderProps> = ({ onNavigate }) => {
   const {
     totalUnits,
     setIsCartOpen,
-    favorites,
-    setIsFavoritesOpen,
     setIsSearchOpen,
-    setIsUserModalOpen,
     currency,
     toggleCurrency,
-    channel,
     setChannel,
   } = useCart();
 
@@ -230,7 +223,7 @@ export const Header: React.FC<HeaderProps> = ({ onNavigate }) => {
               ¿Tenés dudas sobre las listas de precios o querés coordinar retiro en La Plata? Hablá directamente con nosotros.
             </p>
             <a
-              href={`https://wa.me/${GIANITECH_CONTACT.whatsappDigits}?text=${encodeURIComponent(`Hola Gianitech! Quiero consultar por el catálogo ${channel}.`)}`}
+              href={`https://wa.me/${GIANITECH_CONTACT.whatsappDigits}?text=${encodeURIComponent('¡Hola Gianitech! 👋 Quiero consultar por disponibilidad y precios del catálogo.')}`}
               target="_blank"
               rel="noopener noreferrer"
               className="mt-2 w-full py-2.5 px-3 rounded-lg bg-white text-black font-dmsans font-bold text-xs flex items-center justify-center gap-1.5"

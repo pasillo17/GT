@@ -8,11 +8,10 @@ import { PromotionalBanner } from './components/PromotionalBanner';
 import { BenefitsSection } from './components/BenefitsSection';
 import { Footer } from './components/Footer';
 import { ShoppingCart } from './components/ShoppingCart';
-import { FavoritesModal } from './components/FavoritesModal';
 import { ProductQuickViewModal } from './components/ProductQuickViewModal';
 import { SearchModal } from './components/SearchModal';
-import { UserCareModal } from './components/UserCareModal';
 import { MobileBottomNav } from './components/MobileBottomNav';
+import { FloatingSocialButtons } from './components/FloatingSocialButtons';
 
 function MainApp() {
   const [activeCategory, setActiveCategory] = useState<string>('all');
@@ -72,12 +71,13 @@ function MainApp() {
       {/* Mobile Fixed Bottom Dock */}
       <MobileBottomNav onNavigate={scrollToSection} />
 
+      {/* Floating WhatsApp and Instagram Action Buttons */}
+      <FloatingSocialButtons />
+
       {/* Interactive Modals & Drawers */}
       <ShoppingCart />
-      <FavoritesModal />
       <ProductQuickViewModal />
       <SearchModal onSelectProduct={(id) => {}} />
-      <UserCareModal />
     </div>
   );
 }
