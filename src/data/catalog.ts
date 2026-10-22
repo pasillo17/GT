@@ -7238,7 +7238,7 @@ export const ALL_PRODUCTS: DualProduct[] = [
     "brand": "Samsung",
     "categoryId": "tecnologia",
     "categoryLabel": "Tecnología",
-    "image": "/src/assets/images/product_samsung_galaxy_1792105263682.jpg",
+    "image": "https://github.com/pasillo17/galeriaPasillo/blob/main/Dise%C3%B1o%20sin%20t%C3%ADtulo%20-%202026-10-22T163651.654.png?raw=true",
     "isTop5": false,
     "page": 38,
     "variant": "Samsung Oficial",

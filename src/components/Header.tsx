@@ -38,32 +38,26 @@ export const Header: React.FC<HeaderProps> = ({ onNavigate }) => {
     <>
       <header className="sticky top-0 z-40 bg-[#050505]/92 backdrop-blur-xl border-b border-white/[0.08] transition-all">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-14 sm:h-20">
-            {/* Left: Official Gianitech Brand Logo */}
+          <div className="flex items-center justify-between h-16 sm:h-20 md:h-22">
+            {/* Left: Official Gianitech Protagonist Monogram Brandmark */}
             <a
               href="#inicio"
               onClick={(e) => {
                 e.preventDefault();
                 handleNavClick('inicio');
               }}
-              className="flex items-center gap-2.5 sm:gap-3 group focus:outline-none py-1"
+              className="group focus:outline-none py-1.5 relative flex items-center cursor-pointer transition-transform active:scale-95"
+              title="GIANITECH IMPORT — Inicio"
             >
-              <div className="relative w-9 h-9 sm:w-11 sm:h-11 flex items-center justify-center rounded-xl bg-white/[0.04] border border-white/[0.12] p-1.5 group-hover:border-white/30 transition-all shadow-[0_0_15px_rgba(255,255,255,0.06)] group-hover:shadow-[0_0_20px_rgba(255,255,255,0.18)]">
-                <img
-                  src="/src/assets/images/gianitech_logo.png"
-                  alt="Logo Oficial Gianitech Import"
-                  referrerPolicy="no-referrer"
-                  className="w-full h-full object-contain filter drop-shadow-[0_0_8px_rgba(255,255,255,0.35)] group-hover:scale-105 transition-transform"
-                />
-              </div>
-              <div className="flex flex-col text-left">
-                <span className="font-heading text-lg sm:text-2xl font-bold tracking-tight text-white group-hover:text-zinc-200 transition-colors leading-none">
-                  GIANITECH
-                </span>
-                <span className="text-[7.5px] sm:text-[9px] tracking-[0.28em] text-[#86868b] uppercase font-montserrat mt-0.5 group-hover:text-zinc-400 transition-colors">
-                  IMPORTADOS
-                </span>
-              </div>
+              {/* Luxury Ambient Halo Glow behind logo */}
+              <div className="absolute inset-0 -inset-x-3 bg-gradient-to-r from-white/[0.08] via-emerald-400/[0.05] to-transparent rounded-2xl blur-xl opacity-40 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+
+              <img
+                src="/src/assets/images/gianitech_logo.png"
+                alt="GIANITECH IMPORT"
+                referrerPolicy="no-referrer"
+                className="h-10 xs:h-11 sm:h-14 md:h-15 w-auto object-contain filter drop-shadow-[0_2px_14px_rgba(255,255,255,0.25)] group-hover:drop-shadow-[0_0_26px_rgba(255,255,255,0.55)] group-hover:scale-[1.04] transition-all duration-300 relative z-10 select-none"
+              />
             </a>
 
             {/* Center: Desktop Navigation & Channel Switcher */}
@@ -144,24 +138,14 @@ export const Header: React.FC<HeaderProps> = ({ onNavigate }) => {
 
       {/* Mobile Slide-down Navigation Menu */}
       {mobileMenuOpen && (
-        <div className="lg:hidden fixed inset-x-0 top-14 bottom-0 z-30 bg-[#080808]/98 backdrop-blur-2xl px-6 py-6 overflow-y-auto space-y-6 animate-in slide-in-from-top-2 border-b border-white/[0.1]">
+        <div className="lg:hidden fixed inset-x-0 top-16 bottom-0 z-30 bg-[#080808]/98 backdrop-blur-2xl px-6 py-6 overflow-y-auto space-y-6 animate-in slide-in-from-top-2 border-b border-white/[0.1]">
           {/* Brand header in mobile drawer */}
-          <div className="flex items-center gap-3 pb-3 border-b border-white/[0.08]">
-            <div className="w-11 h-11 rounded-xl bg-white/[0.04] border border-white/[0.12] p-1.5 flex items-center justify-center shadow-[0_0_15px_rgba(255,255,255,0.08)]">
-              <img
-                src="/src/assets/images/gianitech_logo.png"
-                alt="Gianitech Import"
-                className="w-full h-full object-contain filter drop-shadow-[0_0_8px_rgba(255,255,255,0.35)]"
-              />
-            </div>
-            <div className="flex flex-col text-left">
-              <span className="font-heading text-lg font-bold tracking-tight text-white leading-none">
-                GIANITECH
-              </span>
-              <span className="text-[8px] tracking-[0.25em] text-[#86868b] uppercase font-montserrat mt-1">
-                IMPORTADOS · OFICIAL
-              </span>
-            </div>
+          <div className="flex items-center justify-center pb-4 border-b border-white/[0.08]">
+            <img
+              src="/src/assets/images/gianitech_logo.png"
+              alt="GIANITECH IMPORT"
+              className="h-12 w-auto object-contain filter drop-shadow-[0_0_16px_rgba(255,255,255,0.35)]"
+            />
           </div>
 
 
